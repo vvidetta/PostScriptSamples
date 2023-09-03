@@ -1,0 +1,22 @@
+(fizzbuzz.ps) run
+(psunit.ps) run
+
+/FizzbuzzTests <<
+/GivenAMultipleOf3ButNot5CheckFizzbuzzReturnsFizz {
+  3 fizzbuzz (fizz) assert_eq
+}
+
+/GivenAMultipleOf5ButNot3CheckFizzbuzzReturnsBuzz {
+  5 fizzbuzz (buzz) assert_eq
+}
+
+/GivenAMultipleOf15CheckFizzbuzzReturnsFizzbuzz {
+  15 fizzbuzz (fizzbuzz) assert_eq
+}
+
+/GivenANonMultipleOf3Or5CheckFizzBuzzDoesNotReturnFizz {
+  2 fizzbuzz (fizz) assert_ne
+}
+>> def
+
+FizzbuzzTests run_tests

@@ -1,0 +1,53 @@
+/pop_arg { exch def } def
+/endl { (\n) print } def
+/println { print (\n) print } def
+/assert { } def
+
+/print_assert_eq_failed {
+  2 dict begin
+  /expected pop_arg
+  /observed pop_arg
+  (Failed: expected ") print expected print (" but got ") print observed print (") print endl
+  end
+} def
+
+/print_assert_ne_failed {
+  2 dict begin
+  /expected pop_arg
+  /observed pop_arg
+  (Failed: expected not equal to ") print expected print (") print endl
+  end
+} def
+
+/assert_eq {
+  2 dict begin
+  /expected pop_arg
+  /observed pop_arg
+  observed expected eq
+  not { observed expected print_assert_eq_failed } if
+  end
+} def
+
+/assert_ne {
+  2 dict begin
+  /expected pop_arg
+  /observed pop_arg
+  observed expected ne
+  not { observed expected print_assert_ne_failed } if
+  end
+} def
+
+/run_test {
+  3 dict begin
+  /TestMethod pop_arg
+  /Test pop_arg
+  Test Test length string cvs /TestName pop_arg
+  (Now Running ) print TestName print endl
+  TestMethod exec % actually run the test
+  (Finished Running ) print TestName print endl
+  end
+} def
+
+/run_tests {
+  /run_test load forall
+} def

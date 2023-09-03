@@ -1,0 +1,18 @@
+% fizzbuzz is a simple function that returns a string based on the given integer
+% multiples of 3, but not 5 should return fizz
+% multiples of 5, but not 3 should return buzz
+% multiples of 15 (i.e. both 3 and 5) should return fizzbuzz
+% all other integers should return the integer as a string
+
+/fizzbuzz {
+  1 dict begin
+  /num exch def
+  num 15 mod 0 eq { (fizzbuzz) } {
+    num 5 mod 0 eq { (buzz) } {
+      num 3 mod 0 eq { (fizz) } {
+        (2) % TODO: How do I convert an arbitrary integer into a string?
+      } ifelse
+    } ifelse
+  } ifelse
+  end
+} def
